@@ -1,3 +1,8 @@
+# Author: Lalitha Viswanathan
+# Naive ECGR Mutation detector
+# May 2021
+# Python package checks if reference dimer differs from dimer in supporting reads at a given position
+# For both upstream and downstream dimers
 from typing import Any, Union
 
 import pandas
@@ -9,9 +14,9 @@ from findreadinreference.findreadinreference import searchtrimerinreference
 
 
 #######################################################################################################
-def findpointmutationsinupstreamdimers(supporting_reads_pointmutations: pandas.DataFrame.astype, counter: int,
-                                       readpos: int, reference: str, reference_dict: dict,
-                                       variantpositions: dict, writer: csv) -> (dict, csv):
+def findECGRmutationsinupstreamdimers(supporting_reads_pointmutations: pandas.DataFrame.astype, counter: int,
+                                      readpos: int, reference: str, reference_dict: dict,
+                                      variantpositions: dict, writer: csv) -> (dict, csv):
     """
 
     :rtype: object
@@ -50,11 +55,11 @@ def findpointmutationsinupstreamdimers(supporting_reads_pointmutations: pandas.D
 
 
 #######################################################################################################
-def findpointmutationsindownstreamdimers(supporting_reads_pointmutations: pandas.DataFrame.astype, counter: int,
-                                         readpos: int,
-                                         lensmallestread: int,
-                                         reference: str, reference_dict: dict, variantpositions: dict,
-                                         writer: csv) -> (dict, csv):
+def findECGRmutationsindownstreamdimers(supporting_reads_pointmutations: pandas.DataFrame.astype, counter: int,
+                                        readpos: int,
+                                        lensmallestread: int,
+                                        reference: str, reference_dict: dict, variantpositions: dict,
+                                        writer: csv) -> (dict, csv):
     """
 
     :type counter: int

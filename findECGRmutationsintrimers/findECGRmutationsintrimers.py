@@ -1,13 +1,18 @@
+# Author: Lalitha Viswanathan
+# Naive ECGR Mutation detector
+# May 2021
+# Python package checks if reference trimer differs from trimer in supporting reads at a given position
+# For both upstream and downstream trimers
 import pandas
 import csv
 import findreadinreference.findreadinreference as frr
 
 
 #######################################################################################################
-def findpointmutationsinupstreamtrimers(supporting_reads_pointmutations: pandas.DataFrame.astype,
-                                        counter: int,
-                                        readpos: int, reference: str, reference_dict: dict,
-                                        variantpositions: dict, writer: csv) -> (dict, csv):
+def findECGRmutationsinupstreamtrimers(supporting_reads_pointmutations: pandas.DataFrame.astype,
+                                       counter: int,
+                                       readpos: int, reference: str, reference_dict: dict,
+                                       variantpositions: dict, writer: csv) -> (dict, csv):
     """
 
     :type readpos: int
@@ -57,10 +62,10 @@ def findpointmutationsinupstreamtrimers(supporting_reads_pointmutations: pandas.
 
 
 #######################################################################################################
-def findpointmutationsindownstreamtrimers(supporting_reads_pointmutations: pandas.DataFrame, counter: int,
-                                          readpos: int, reference: str, lensmallestread: int,
-                                          reference_dict: dict,
-                                          variantpositions: dict, writer: csv) -> (dict, csv):
+def findECGRmutationsindownstreamtrimers(supporting_reads_pointmutations: pandas.DataFrame, counter: int,
+                                         readpos: int, reference: str, lensmallestread: int,
+                                         reference_dict: dict,
+                                         variantpositions: dict, writer: csv) -> (dict, csv):
     """
 
     :type lensmallestread: int

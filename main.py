@@ -1,5 +1,8 @@
-# This is a sample Python script.
 
+# Author: Lalitha Viswanathan
+# Naive ECGR mutation detector
+# May 2021
+# Classifies as a mutation reference fragment of length 1-3 bp if number of supporting reads are greater than 5
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import sys
@@ -11,11 +14,11 @@ import referenceutilities.readreference as refutilites
 import csv
 import pandas
 import findsupportingreads.findsupportingreads as fsr
-import findalldimers.findalldimers as dimers
-import findalltrimers.findalltrimers as trimers
-from findpointmutationsintrimers.findpointmutationsintrimers import findpointmutationsinupstreamtrimers, \
-    findpointmutationsindownstreamtrimers
-import findpointmutationsindimers.findpointmutationsindimers as fpmtindmrs
+import findalldimersinsupportingreads.findalldimersinupportingreads as dimers
+import findalltrimersinsupportingreads.findalltrimersinupportingreads as trimers
+from findECGRmutationsintrimers.findECGRmutationsintrimers import findECGRmutationsinupstreamtrimers, \
+    findECGRmutationsindownstreamtrimers
+import findECGRmutationsindimers.findECGRmutationsindimers as fpmtindmrs
 
 
 def main():
@@ -36,9 +39,9 @@ def main():
     # interface to fastqc etc.
     # interface to GATK / BioPython
     # Index the reference genome to find locations of monomers, dimers and trimers
-    reference_dict = refindex.indexreferencetofinddimers(reference, length_of_reference, reference_dict)
-    reference_dict = refindex.indexreferencetofindtrimers(reference, length_of_reference, reference_dict)
-    reference_dict = refindex.indexreferencetofindmonomers(reference, length_of_reference, reference_dict)
+    reference_dict = refindex.indexreferencegenometofinddimers(reference, length_of_reference, reference_dict)
+    reference_dict = refindex.indexreferencegenometofindtrimers(reference, length_of_reference, reference_dict)
+    reference_dict = refindex.indexreferencegenometofindmonomers(reference, length_of_reference, reference_dict)
 
     # After indexing reference genome
     index_of_read_most_upstream: int = int(reads["position"].min())
@@ -117,25 +120,25 @@ def main():
                 assert isinstance(int(readpos), int)
                 assert isinstance(reference, str)
                 assert isinstance(lensmallestread, int)
-                (variantpositions, writer) = findpointmutationsinupstreamtrimers(
+                (variantpositions, writer) = findECGRmutationsinupstreamtrimers(
                     supporting_reads_pointmutations,
                     counter,
                     readpos, reference,
                     reference_dict, variantpositions,
                     writer)
-                (variantpositions, writer) = findpointmutationsindownstreamtrimers(
+                (variantpositions, writer) = findECGRmutationsindownstreamtrimers(
                     supporting_reads_pointmutations,
                     counter,
                     readpos, reference,
                     lensmallestread, reference_dict,
                     variantpositions, writer)
-                (variantpositions, writer) = fpmtindmrs.findpointmutationsinupstreamdimers(
+                (variantpositions, writer) = fpmtindmrs.findECGRmutationsinupstreamdimers(
                     supporting_reads_pointmutations,
                     counter, readpos,
                     reference,
                     reference_dict, variantpositions,
                     writer)
-                (variantpositions, writer) = fpmtindmrs.findpointmutationsindownstreamdimers(
+                (variantpositions, writer) = fpmtindmrs.findECGRmutationsindownstreamdimers(
                     supporting_reads_pointmutations,
                     counter,
                     readpos, lensmallestread, reference,
@@ -143,8 +146,9 @@ def main():
                     writer)
 
                 # At this stage point mutations,  and
-                # mutations 3bp long, both upstream and downstream
+                # mutations 3bp and 2bp long, both upstream and downstream
                 # count reference and alt alleles for point mutations
+                # If there are more than 5 reads supporting the alt call, it is not treated as noise
                 variantcounts = supporting_reads_pointmutations["variant"].value_counts()
                 uniquevariants = supporting_reads_pointmutations["variant"].unique()
             

@@ -1,8 +1,10 @@
-
-
+# Author: Lalitha Viswanathan
+# Module builds index of reference genome (for n=1-3 of size n; fragments)
+# May 2021
+# Naive ECGR mutation detector
 ################ Index the reference assembly (in this case ECGR) #################################
 # function that indexes the reference reads as 1-3 bp
-def indexreferencetofindtrimers(reference: str, length_of_reference: int, reference_dict: dict) -> dict:
+def indexreferencegenometofindtrimers(reference: str, length_of_reference: int, reference_dict: dict) -> dict:
     """
 
     :type length_of_reference: int
@@ -24,7 +26,7 @@ def indexreferencetofindtrimers(reference: str, length_of_reference: int, refere
 
 
 #######################################################################################################
-def indexreferencetofindmonomers(reference: str, length_of_reference: int, reference_dict: dict) -> dict:
+def indexreferencegenometofindmonomers(reference: str, length_of_reference: int, reference_dict: dict) -> dict:
     """
 
     :type length_of_reference: int
@@ -47,7 +49,7 @@ def indexreferencetofindmonomers(reference: str, length_of_reference: int, refer
 
 #######################################################################################################
 # function that indexes the reference reads as 1-3 bp
-def indexreferencetofinddimers(reference: str, length_of_reference: int, reference_dict: dict) -> dict:
+def indexreferencegenometofinddimers(reference: str, length_of_reference: int, reference_dict: dict) -> dict:
     """
 
     :rtype: dict

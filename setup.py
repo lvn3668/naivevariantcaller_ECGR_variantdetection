@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name='naivevariantcaller',
     version='0.1',
-    packages=['findalldimers', 'findalltrimers', 'referenceutilities', 'findreadinreference', 'findsupportingreads',
-              'findpointmutationsindimers', 'findpointmutationsintrimers'],
+    packages=['findalldimersinsupportingreads', 'findalltrimersinsupportingreads', 'referenceutilities', 'findreadinreference', 'findsupportingreads',
+              'findECGRmutationsindimers', 'findECGRmutationsintrimers'],
     url='',
     license='Open-GPL',
     author='lalitha v',

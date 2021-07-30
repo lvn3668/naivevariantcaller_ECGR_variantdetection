@@ -1,3 +1,7 @@
+# Author Lalitha Viswanathan
+# Package finds all supporting reads spanning that position along reference genome
+# Returns dataframe of all supporting reads
+# Naive ECGR Mutation detector (May 2021)
 import pandas
 
 
@@ -14,10 +18,10 @@ def findsupportingreads(reads: pandas.DataFrame.astype, readpos: int) -> pandas.
     # for each read
     # find all supporting reads spanning the start of the read (Readpos)
 
-    # supporting reads is defined as reads going from reads["position"] till the length of the longest read
+    # supporting reads is defined as reads spanning reads["position"] till the length of the longest read
     # it is a panda DataFrame containing all the reads
-    supporting_reads_pointmutations: pandas.DataFrame.astype = reads[
+    supporting_reads_tofindpointmutations: pandas.DataFrame.astype = reads[
         (readpos >= reads["position"]) &
         (readpos < (reads["position"] + reads["sequence"].str.len()))].copy()
-    assert isinstance(supporting_reads_pointmutations, pandas.DataFrame)
-    return supporting_reads_pointmutations
+    assert isinstance(supporting_reads_tofindpointmutations, pandas.DataFrame)
+    return supporting_reads_tofindpointmutations

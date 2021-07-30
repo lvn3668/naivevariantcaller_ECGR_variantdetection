@@ -1,3 +1,11 @@
+# Author: Lalitha Viswanathan
+# Python Package to index the reference genome
+# Builds index of all nmers (n=1-3) as point mutations is defined as
+# 1-3 bp mutations
+# 3 consecutive point mutations to be called as 1 variant
+# This code reads in reference genome into dataframe
+# Reads all read fragments
+# Returns reference, reads and length of reference
 from typing import TextIO
 
 import pandas
